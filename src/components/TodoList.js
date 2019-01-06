@@ -3,7 +3,7 @@ import TodoItem from "./TodoItem";
 
 export default class TodoList extends Component {
   render() {
-    const { items } = this.props;
+    const { items, clearList, handleDelete, handleEdit } = this.props;
 
     return (
       <div>
@@ -11,10 +11,20 @@ export default class TodoList extends Component {
           <h3 className="text-capitalize text-center">todo list</h3>
 
           {items.map(item => {
-            return <TodoItem key={item.id} title={item.title} />;
+            return (
+              <TodoItem
+                key={item.id}
+                title={item.title}
+                handleDelete={() => handleDelete(item.id)}
+                handleEdit={() => handleEdit(item.id)}
+              />
+            );
           })}
 
-          <button className="btn btn-danger btn-block text-capitalize mt-5">
+          <button
+            className="btn btn-danger btn-block text-capitalize mt-5"
+            onClick={clearList}
+          >
             clear list
           </button>
         </ul>
